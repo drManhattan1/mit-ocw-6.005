@@ -12,34 +12,35 @@ class FinancialCalc {
                 + " at an interest rate of " + (interestRate * 100) + "%"
                 + " for " + numOfYears + " years"
                 + " will have a final worth of $" + finalValue);
+        
+        System.out.println("\nAnswers to questions:");
+        System.out.println("1.  " + computePrincipal(1000.00,0.05,4));
+        System.out.println("2.  " + computeInterestRate(525.00,500.00,3));
+        System.out.println("3.  " + computeNumOfYears(150.00,100.00,0.044));
     }
     
     static double computeFinalValue(double principal,
                                     double interestRate,
                                     int numOfYears) {
-      /*REPLACE WITH YOUR CODE*/
-      return 0.0;
+      return principal * Math.pow((1 + interestRate), numOfYears);
     }
     
     static double computePrincipal(double finalValue,
                                    double interestRate,
                                    int numOfYears) {
-        /*REPLACE WITH YOUR CODE*/
-        return 0.0;
+        return finalValue / Math.pow(1 + interestRate, numOfYears);
     }
 
     static double computeInterestRate(double finalValue,
                                       double principal,
                                       int numOfYears) {
-        /*REPLACE WITH YOUR CODE*/
-        return 0.0;
+        return Math.pow(10,Math.log(finalValue/principal) / numOfYears) - 1;
     }
 
     static double computeNumOfYears(double finalValue,
                                     double principal,
                                     double interestRate) {
-        /*REPLACE WITH YOUR CODE*/
-        return 0.0;
+        return Math.log(finalValue/principal) / Math.log(1 + interestRate);
     }
 
 }
