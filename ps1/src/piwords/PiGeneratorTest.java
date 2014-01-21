@@ -11,5 +11,9 @@ public class PiGeneratorTest {
         assertEquals(17, PiGenerator.powerMod(5, 7, 23));
     }
 
-    // TODO: Write more tests (Problem 1.a, 1.c)
+    @Test
+    public void basicComputePiInHexTest(){
+    	assertNull(PiGenerator.computePiInHex(-1));
+    	assertArrayEquals(new int[]{2,4,3,15,6},PiGenerator.computePiInHex(5));
+    }
 }
