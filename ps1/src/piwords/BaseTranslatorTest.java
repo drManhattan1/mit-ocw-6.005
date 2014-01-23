@@ -15,5 +15,13 @@ public class BaseTranslatorTest {
                           BaseTranslator.convertBase(input, 2, 10, 2));
     }
 
-    // TODO: Write more tests (Problem 2.a)
+    @Test
+    //tests cases that return null
+    public void convertBaseFailureTest(){
+    	assertNull( BaseTranslator.convertBase(new int[]{-1},2,10,5));
+    	assertNull( BaseTranslator.convertBase(new int[]{3},2,10,5));
+    	assertNull( BaseTranslator.convertBase(new int[]{3},1,10,5));
+    	assertNull( BaseTranslator.convertBase(new int[]{3},2,1,5));
+    	assertNull( BaseTranslator.convertBase(new int[]{3},2,10,0));
+    }
 }

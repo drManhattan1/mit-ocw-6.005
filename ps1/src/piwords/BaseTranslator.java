@@ -31,9 +31,25 @@ public class BaseTranslator {
      *                   have.
      * @return An array of size precisionB expressing digits in baseB.
      */
-    public static int[] convertBase(int[] digits, int baseA,
-                                    int baseB, int precisionB) {
-        // TODO: Implement (Problem 2.b)
-        return null;
+    public static int[] convertBase(int[] digits, int baseA, int baseB, int precisionB) {
+    	
+    	if(baseA < 2 || baseB < 2 || precisionB <1)
+    		return null;
+    	
+        int[] ret = new int[precisionB];
+        
+        for(int i=0; i<precisionB ; i++){
+        	if(digits[i] < 0 || digits[i] >= baseA) 
+        		return null;
+        	
+        	int carry = 0; //1
+        	for(int j=digits.length-1;j>=0;j--){ //2
+        		int x = digits[i] * baseB;
+        		digits[i] = x % baseA;
+        		ret[i] = carry;
+        	}
+        
+        }
+        return ret;
     }
 }
