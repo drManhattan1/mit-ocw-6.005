@@ -22,5 +22,38 @@ public class WordFinderTest {
                                                               needles));
     }
 
-    // TODO: Write more tests (Problem 4.a)
+    @Test
+    public void noHits(){
+    	String haystack = "abcde";
+        String[] needles = {"az", "at", "t"};
+        
+        Map<String, Integer> expectedOutput = new HashMap<String, Integer>(); //empty result
+
+        assertEquals(expectedOutput, WordFinder.getSubstrings(haystack,
+                                                              needles));
+    }
+    
+    @Test
+    public void emptyHaystack(){
+    	String haystack = "";
+        String[] needles = {"az", "at", "t"};
+        
+        Map<String, Integer> expectedOutput = new HashMap<String, Integer>(); //empty result
+
+        assertEquals(expectedOutput, WordFinder.getSubstrings(haystack,
+                                                              needles));
+    }
+    
+    @Test
+    public void emptyNeedles(){
+    	String haystack = "abcdef";
+        String[] needles = {};
+        
+        Map<String, Integer> expectedOutput = new HashMap<String, Integer>(); //empty result
+
+        assertEquals(expectedOutput, WordFinder.getSubstrings(haystack,
+                                                              needles));
+    }
+    
+    
 }
