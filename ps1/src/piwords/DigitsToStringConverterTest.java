@@ -18,6 +18,29 @@ public class DigitsToStringConverterTest {
                      DigitsToStringConverter.convertDigitsToString(
                              input, 4, alphabet));
     }
+    
+    @Test
+    public void largeDigitNumberSerializerTest(){
+        int[] input = {0, 1, -1, 3};
 
-    // TODO: Write more tests (Problem 3.a)
+        char[] alphabet = {'d', 'c', 'b', 'a'};
+
+        String expectedOutput = "dcba";
+        assertNull(expectedOutput,
+                     DigitsToStringConverter.convertDigitsToString(
+                             input, 4, alphabet));
+    }
+    
+    @Test
+    public void smallNumberSerializerTest(){
+        int[] input = {0, 1, 2, 4};
+
+        char[] alphabet = {'d', 'c', 'b', 'a'};
+
+        String expectedOutput = "dcba";
+        assertNull(expectedOutput,
+                     DigitsToStringConverter.convertDigitsToString(
+                             input, 4, alphabet));
+    }
+
 }
