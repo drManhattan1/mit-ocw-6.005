@@ -19,5 +19,33 @@ public class AlphabetGeneratorTest {
                         10, trainingData));
     }
 
-    // TODO: Write more tests (Problem 5.a)
+    @Test
+    public void negativeBase(){
+    	assertNull(
+                AlphabetGenerator.generateFrequencyAlphabet(
+                        -1, new String[]{"test"}));
+    }
+    
+    @Test
+    public void zeroBase(){
+    	assertArrayEquals(new char[0],
+    			AlphabetGenerator.generateFrequencyAlphabet(
+    					0, new String[]{"test"}));
+    }
+    
+    @Test
+    public void noTrainingData(){
+    	//test case when base is zero and non-zero
+        String[] trainingData = {};
+        char[] expectedOutput = {};
+        assertArrayEquals(expectedOutput,
+                AlphabetGenerator.generateFrequencyAlphabet(
+                        0, trainingData));
+        
+        //non-zero case
+        assertArrayEquals(expectedOutput,
+                AlphabetGenerator.generateFrequencyAlphabet(
+                        10, trainingData));
+    }
+    
 }

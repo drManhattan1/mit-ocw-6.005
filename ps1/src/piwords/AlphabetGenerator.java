@@ -1,6 +1,13 @@
 package piwords;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class AlphabetGenerator {
+	
+	 private static final char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
     /**
      * Given a numeric base, return a char[] that maps every digit that is
      * representable in that base to a lower-case char.
@@ -44,15 +51,80 @@ public class AlphabetGenerator {
      * If a String of trainingData has any characters outside the range a-z,
      * ignore those characters and continue.
      * 
+     * 
      * @param base A numeric base to get an alphabet for.
      * @param trainingData The training data from which to generate frequency
      *                     counts. This array is not mutated.
      * @return A char[] that maps every digit of the base to a char that the
      *         digit should be translated into.
      */
-    public static char[] generateFrequencyAlphabet(int base,
+	public static char[] generateFrequencyAlphabet(int base,
                                                    String[] trainingData) {
-        // TODO: Implement (Problem 5.b)
-        return null;
+    	//check input parameters
+    	if(base<0)
+    		return null;
+    	
+    	if(base==0 || trainingData.length==0)
+    		return new char[0];
+    	
+    	int totalNumChars = 0;
+    	Map<Character,Double> charFrequencies = getZeroCharFrequencies();
+    	
+    	for(String str : trainingData){
+    		str = str.toLowerCase();
+    		
+    		for(int i=0; i<str.length(); i++){
+    			if(str.substring(i,i+1).matches("[a-z]")){ //note use of substring to get character, so I can use matches() function
+    				charFrequencies.put(str.charAt(i), charFrequencies.get(str.charAt(i))+1);
+    				totalNumChars++;
+    			}
+    		}
+    	}
+    	
+    	if(totalNumChars==0)
+    		return new char[0];
+    	
+    	return convertToCDF(charFrequencies,totalNumChars,base);
+    }
+    
+    //converts map of character frequencies to frequency alphabet
+    private static char[] convertToCDF(Map<Character, Double> fMap, int totalNumChars, int base){
+    	for(Entry<Character,Double> e : fMap.entrySet()){
+    		fMap.put(e.getKey(), e.getValue()/(double)totalNumChars);
+    	}
+    	
+    	double carry = 0;
+    	for(char c : alphabet){
+    		Double pr = fMap.get(c);
+    		pr+=carry;
+    		fMap.put(c, pr);
+    		carry=pr;
+    	}
+    	
+    	char[] fAlphabet = new char[base];
+    	int startCopyIdx = 0;
+    	int endCopyIdx = 0;
+    	for(char c : alphabet){
+    		
+    		endCopyIdx = (int)Math.round(fMap.get(c)*base) - 1;
+    		
+    		//copy c from start index to end index
+    		for(int i=startCopyIdx;i<=endCopyIdx;i++){
+    			fAlphabet[i] = c;
+    		}
+    		
+    		startCopyIdx = endCopyIdx + 1;
+    	}
+    	
+    	return fAlphabet;
+    }
+    
+    //creates a map with k = character and v = 0 for all characaters in alphabet
+    private static Map<Character, Double> getZeroCharFrequencies(){
+    	Map<Character,Double> charFrequencies = new HashMap<Character,Double>();
+    	for(char c : alphabet){
+    		charFrequencies.put(c, 0.0);
+    	}
+    	return charFrequencies;
     }
 }
