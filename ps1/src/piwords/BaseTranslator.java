@@ -33,23 +33,24 @@ public class BaseTranslator {
      */
     public static int[] convertBase(int[] digits, int baseA, int baseB, int precisionB) {
     	
+    	//check for bad input
     	if(baseA < 2 || baseB < 2 || precisionB <1)
     		return null;
     	
-        int[] ret = new int[precisionB];
-        
         for(int i=0; i<precisionB ; i++){
         	if(digits[i] < 0 || digits[i] >= baseA) 
         		return null;
-        	
-        	int carry = 0; //1
-        	for(int j=digits.length-1;j>=0;j--){ //2
-        		int x = digits[i] * baseB;
-        		digits[i] = x % baseA;
-        		ret[i] = carry;
-        	}
-        
         }
-        return ret;
+        
+    	int[] ret = new int[precisionB];
+    	int carry = 0;
+    	for(int i=precisionB-1;i>=0;i--){
+    		int x = (digits[i]*baseB)+carry;
+    		digits[i] = x % baseA;
+    		carry = x / baseA;
+    		ret[i] = carry;
+    	}
+    	
+    	return ret;
     }
 }
