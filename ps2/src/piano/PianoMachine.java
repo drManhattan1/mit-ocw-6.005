@@ -24,17 +24,19 @@ public class PianoMachine {
         }
     }
     
-    //TODO write method spec
+    /**
+     * @param rawPitch that will begin to sound
+     */
     public void beginNote(Pitch rawPitch) {
-    	midi.beginNote(new Pitch(0).toMidiFrequency());
-    	//TODO implement for question 1
+    	midi.beginNote(rawPitch.toMidiFrequency());
 
     }
     
-    //TODO write method spec
+    /**
+     * @param rawPitch that will stop sounding
+     */
     public void endNote(Pitch rawPitch) {
-    	midi.endNote(new Pitch(0).toMidiFrequency());
-    	//TODO implement for question 1
+    	midi.endNote(rawPitch.toMidiFrequency());
     }
     
     //TODO write method spec
