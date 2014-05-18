@@ -11,6 +11,8 @@ public class PianoMachine {
 	private Midi midi;
 	
 	private Instrument instrument = Midi.DEFAULT_INSTRUMENT;
+	
+	private int semiTonesShift = 0;
     
 	/**
 	 * constructor for PianoMachine.
@@ -29,33 +31,41 @@ public class PianoMachine {
     
     /**
      * @param rawPitch that will begin to sound using current instrument
+     * Shifts frequency of rawPitch up or down a number of semi-tones set by semiTonesShift 
      */
     public void beginNote(Pitch rawPitch) {
-    	midi.beginNote(rawPitch.toMidiFrequency(),instrument);
+    	midi.beginNote(rawPitch.transpose(semiTonesShift).toMidiFrequency(),instrument);
     }
     
     /**
      * @param rawPitch that will stop sounding the current instrument
+     * Shifts frequency of rawPitch up or down a number of semi-tones set by semiTonesShift 
      */
     public void endNote(Pitch rawPitch) {
-    	midi.endNote(rawPitch.toMidiFrequency(),instrument);
+    	midi.endNote(rawPitch.transpose(semiTonesShift).toMidiFrequency(),instrument);
     }
     
     /**
-     * changes instrument to next instrument in Instrument enum class
+     * sets instrument to next instrument in Instrument enum class
      */
     public void changeInstrument() {
        	instrument = instrument.next();
     }
     
-    //TODO write method spec
+    /**
+     * shifts octave, up to two octaves up.
+     */
     public void shiftUp() {
-    	//TODO: implement for question 3
+    	if(semiTonesShift != 24)
+    		semiTonesShift += 12;
     }
     
-    //TODO write method spec
+    /**
+     * shifts octave, up to two octaves down.
+     */
     public void shiftDown() {
-    	//TODO: implement for question 3
+    	if(semiTonesShift != -24)
+    		semiTonesShift -= 12;
     }
     
     //TODO write method spec
