@@ -2,12 +2,15 @@ package piano;
 
 import javax.sound.midi.MidiUnavailableException;
 
+import midi.Instrument;
 import midi.Midi;
 import music.Pitch;
 
 public class PianoMachine {
 	
 	private Midi midi;
+	
+	private Instrument instrument = Midi.DEFAULT_INSTRUMENT;
     
 	/**
 	 * constructor for PianoMachine.
@@ -25,23 +28,24 @@ public class PianoMachine {
     }
     
     /**
-     * @param rawPitch that will begin to sound
+     * @param rawPitch that will begin to sound using current instrument
      */
     public void beginNote(Pitch rawPitch) {
-    	midi.beginNote(rawPitch.toMidiFrequency());
-
+    	midi.beginNote(rawPitch.toMidiFrequency(),instrument);
     }
     
     /**
-     * @param rawPitch that will stop sounding
+     * @param rawPitch that will stop sounding the current instrument
      */
     public void endNote(Pitch rawPitch) {
-    	midi.endNote(rawPitch.toMidiFrequency());
+    	midi.endNote(rawPitch.toMidiFrequency(),instrument);
     }
     
-    //TODO write method spec
+    /**
+     * changes instrument to next instrument in Instrument enum class
+     */
     public void changeInstrument() {
-       	//TODO: implement for question 2
+       	instrument = instrument.next();
     }
     
     //TODO write method spec
