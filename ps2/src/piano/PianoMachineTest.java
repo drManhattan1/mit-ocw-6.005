@@ -1,7 +1,6 @@
 package piano;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import javax.sound.midi.MidiUnavailableException;
 
@@ -119,6 +118,31 @@ public class PianoMachineTest {
 		Midi.wait(100);
 		pm.endNote(new Pitch(1));
 
+        System.out.println(midi.history());
+        assertEquals(expected0,midi.history());
+    }
+    
+    @Test
+    public void recordSingleNoteTest() throws MidiUnavailableException {
+    	PianoMachine pm = new PianoMachine();
+        String expected0 = "on(61,PIANO) wait(100) off(61,PIANO)";
+        
+    	Midi midi = Midi.getInstance();
+
+    	midi.clearHistory();
+    	
+    	pm.toggleRecording();
+        pm.beginNote(new Pitch(1));
+		Midi.wait(100);
+		pm.endNote(new Pitch(1));
+
+		//check output
+        System.out.println(midi.history());
+        assertEquals(expected0,midi.history());
+        
+        //check recording
+        midi.clearHistory();
+        pm.playback();
         System.out.println(midi.history());
         assertEquals(expected0,midi.history());
     }
