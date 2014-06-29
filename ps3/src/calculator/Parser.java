@@ -3,7 +3,11 @@ package calculator;
 import calculator.Lexer;
 
 /*
- * TODO define your grammar from problem 1 here
+ * Makes use of the following grammar:
+ * Expression :== Num | Num Op Num | Num Op (Expression) Unit? | (Expression) Unit? Op Num
+ * Unit :== in | pt
+ * Num :== number Unit?
+ * Op :== + | - | * | /
  */
 
 /**
